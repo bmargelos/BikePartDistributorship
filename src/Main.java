@@ -25,7 +25,7 @@ public class Main {
             String info = in.next();
             BikePart bp = new BikePart(info);
             bpArray[x]=bp;
-            System.out.println(info);
+            System.out.println(info );
         }//end of 4-loop
 
         //making a 4-loop and printing all parts that cost less than $20
