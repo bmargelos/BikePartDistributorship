@@ -1,5 +1,5 @@
 //creating a BikePart class
-// =This is a comment 
+// Comments for days
 
 import org.jetbrains.annotations.NotNull;
 
