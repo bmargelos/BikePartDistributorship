@@ -1,5 +1,6 @@
 //I Pledge
 //Brittany Margelos
+//This is a comment too
 
 import java.util.Scanner;
 public class Main {
