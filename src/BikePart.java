@@ -1,5 +1,5 @@
 //creating a BikePart class
-// This is a comment
+// This is a commen
 
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 class BikePart {
 
-    //Luis change
+    //Luis change again
 
    public String partName;
    public String partNumber;
