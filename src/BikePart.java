@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * This class stores information about a bike part
  * @author Brittany Margelos
  * @author BenjaminHichak
+ * @author LuisMaldonado
  */
 
 class BikePart {
