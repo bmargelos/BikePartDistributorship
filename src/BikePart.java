@@ -10,10 +10,7 @@ import org.jetbrains.annotations.NotNull;
  */
 
 class BikePart {
-
-    //Luis change again twice
-
-   public String partName;
+    public String partName;
    public String partNumber;
    public double price, salesPrice;
    public boolean onSale;
