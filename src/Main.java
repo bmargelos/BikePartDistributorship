@@ -6,24 +6,26 @@ import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.util.Scanner;
 public class Main {
-    
-    public static void main(String[] args) throws FileNotFoundException{
-    FileReader("warehouseDB.txt");
-    Scanner Input = new Scanner(System.in);
-    System.out.println("Enter a choice");
-    String UserChoice = Input.next();
-    String Choice = "";
-    while(Choice != "Quit"){
-        System.out.println("Please select an option:"+"Read: Read an inventory delivery file"+"Enter: Enter a part"+"Sell: Sell a part" +"Display: display a part"+"SortName: Sort and Display parts by name"+"SortNumber: Sort parts by part name");in
-        
-    }
 
-    }
+    public static void main(String[] args) throws FileNotFoundException {
+        FileReader("warehouseDB.txt");
+        Scanner Input = new Scanner(System.in);
 
 
+        String Choice = "";
+
+        while (!Choice.equalsIgnoreCase("Quit")) {
+                System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name ");
+                System.out.println("Enter a choice:");
+                Choice = Input.next();
 
 
-    public static void FileReader (String filename) throws FileNotFoundException{
+            }
+
+        }
+
+
+        public static void FileReader (String filename) throws FileNotFoundException {
             FileInputStream inFile;
             inFile = new FileInputStream(filename);
             Scanner sc = new Scanner(inFile);
@@ -35,3 +37,4 @@ public class Main {
         }
 
     }
+
