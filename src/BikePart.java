@@ -1,7 +1,5 @@
 //creating a BikePart class
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * This class stores information about a bike part
  * @author Brittany Margelos
@@ -11,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 class BikePart {
     public String partName;
-   public String partNumber;
+   public int partNumber;
    public double price, salesPrice;
    public boolean onSale;
    public int quantity;
@@ -28,7 +26,7 @@ class BikePart {
     public BikePart(String info) {
         String[] temp = info.split(",");
         this.partName = temp[0];
-        this.partNumber = temp[1];
+        this.partNumber = Integer.parseInt(temp[1]);
         this.price = Double.parseDouble(temp[2]);
         this.salesPrice = Double.parseDouble(temp[3]);
         if (onSale = temp[4].equals("true")){
@@ -37,7 +35,7 @@ class BikePart {
         else{
             onSale=false;
         }
-        this.quantity = temp[5];
+        this.quantity = Integer.parseInt(temp[5]);
     }//end of BikePart constructor
 
     /**
@@ -52,9 +50,9 @@ class BikePart {
      * To set a part number to bike part
      * @param partNumber a new bike part number
      */
-    public void setPartNum(String partNumber){
+    public void setPartNumber(int partNumber){
 
-        this.partNumber=partNumber;
+        this.partNumber = partNumber;
     }//end of setting partNumber
 
     /**
@@ -96,7 +94,7 @@ class BikePart {
      *get bike part number
      * @return part number
      */
-    public String getPartNumber(){
+    public int getPartNumber(){
         return this.partNumber;
     }//end of GetPartNumber
 
@@ -118,7 +116,7 @@ class BikePart {
 
     /**
      *get bike part on sale
-     * @returns true or false depending if bike part is on the sale
+     * @return true or false depending if bike part is on the sale
      */
     public boolean getOnSale() {
         return this.onSale;
