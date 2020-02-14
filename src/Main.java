@@ -3,6 +3,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.util.Scanner;
 public class Main {
     /**
@@ -11,7 +12,11 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException {
 
-        File inFile = new File("input.txt");
+
+
+
+        FileInputStream inFile;
+        inFile = new FileInputStream("inventory.txt");
         Scanner sc = new Scanner(inFile);
         while (sc.hasNextLine()) ;
         {
