@@ -3,20 +3,38 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.util.Scanner;
 public class Main {
-    /**
-     * @param args prints how many lines the user enters
-     *             printing all parts that cost less than $20
-     */
 
- public static void main(String[] args) throws FileNotFoundException {
-     File inFile = new File("warehouseDB.txt");
-     Scanner sc = new Scanner(inFile);
-     while (sc.hasNextLine()) {
-         String line = sc.nextLine();
-         System.out.println(line);
-     }
-     sc.close();
- }//end of PSVM
-}//end of main class
+    public static void main(String[] args) throws FileNotFoundException {
+        FileReader("warehouseDB.txt");
+        Scanner Input = new Scanner(System.in);
+
+
+        String Choice = "";
+
+        while (!Choice.equalsIgnoreCase("Quit")) {
+                System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name ");
+                System.out.println("Enter a choice:");
+                Choice = Input.next();
+
+
+            }
+
+        }
+
+
+        public static void FileReader (String filename) throws FileNotFoundException {
+            FileInputStream inFile;
+            inFile = new FileInputStream(filename);
+            Scanner sc = new Scanner(inFile);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+
+            }
+            sc.close();
+        }
+
+    }
+
