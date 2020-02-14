@@ -14,10 +14,11 @@ class BikePart {
    public String partNumber;
    public double price, salesPrice;
    public boolean onSale;
+   public int quantity;
 
     /**
      * This constructs a bike part that has a specified a part name, a part number,
-     * the price, the sale price, and if the bike part is on sale.
+     * the price, the sale price, whether the bike part is on sale, and it's quantity.
      * A string array called "temp" that when the info is passed through, it will split at the ",".
      * Each current object of the info constructor will be saved into a specific index of temp array
      * @param info stores all the biker part info
@@ -36,7 +37,7 @@ class BikePart {
         else{
             onSale=false;
         }
-
+        this.quantity = temp[5];
     }//end of BikePart constructor
 
     /**
