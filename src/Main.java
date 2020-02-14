@@ -13,7 +13,7 @@ public class Main {
 
 
         FileInputStream inFile;
-        inFile = new FileInputStream("inventory2.txt");
+        inFile = new FileInputStream("warehouseDB.txt");
         Scanner sc = new Scanner(inFile);
         while (sc.hasNextLine())
         {
