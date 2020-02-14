@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.util.Scanner;
+import java.io.FileWriter;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
