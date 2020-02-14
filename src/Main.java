@@ -21,21 +21,7 @@ public class Main {
 
 
 
-    }
-        public String FileReader() throws FileNotFoundException {
-            BufferedReader reader = new BufferedReader(new FileReader("testinventory.txt"))
-            public String readAllLines (BufferedReader reader) throws IOException {
-                StringBuilder content = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-
-                return content.toString();
-            }
-        }
+   
 
 
         /*        // creating a scanner so a user can enter how many lines they want to put in the program
