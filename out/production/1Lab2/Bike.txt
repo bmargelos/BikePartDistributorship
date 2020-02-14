@@ -1,0 +1,3 @@
+26inTube,1234567891,7.00,5.58,true
+seatPost,1234567892,17.00,15.21,true
+carbonHandleBars42cm,1234567893,47.00,5.58,false
