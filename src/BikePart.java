@@ -3,8 +3,8 @@
 /**
  * This class stores information about a bike part
  * @author Brittany Margelos
- * @author BenjaminHichak
- * @author LuisMaldonado
+ * @author Benjamin Hichak
+ * @author Luis Maldonado
  */
 //color
 class BikePart {
@@ -136,6 +136,10 @@ class BikePart {
 
     }// end of getOnSale
 
+    /**
+     * get quantity of bike part
+     * @return the amount of bike parts
+     */
     public int getQuantity(){
         return this.quantity;
     }
