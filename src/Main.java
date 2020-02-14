@@ -1,6 +1,7 @@
 //I Pledge
 //Brittany Margelos
 
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         FileReader("warehouseDB.txt");
         Choices();
+
 
 
 
@@ -49,6 +51,7 @@ public class Main {
             FileInputStream inFile;
             inFile = new FileInputStream(filename);
             Scanner sc = new Scanner(inFile);
+
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
 
