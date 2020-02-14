@@ -6,7 +6,7 @@
  * @author Benjamin Hichak
  * @author Luis Maldonado
  */
-//color
+
 class BikePart {
     public String partName;
     public int partNumber;
