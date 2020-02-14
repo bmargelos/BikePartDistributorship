@@ -1,7 +1,5 @@
 //creating a BikePart class
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * This class stores information about a bike part
  * @author Brittany Margelos
@@ -37,7 +35,7 @@ class BikePart {
         else{
             onSale=false;
         }
-        this.quantity = temp[5];
+        this.quantity = Integer.parseInt(temp[5]);
     }//end of BikePart constructor
 
     /**
@@ -118,7 +116,7 @@ class BikePart {
 
     /**
      *get bike part on sale
-     * @returns true or false depending if bike part is on the sale
+     * @return true or false depending if bike part is on the sale
      */
     public boolean getOnSale() {
         return this.onSale;
