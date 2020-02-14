@@ -37,7 +37,7 @@ class BikePart {
         else{
             onSale=false;
         }
-        this.quantity = temp[5];
+        this.quantity = Integer.parseInt(temp[5]);
     }//end of BikePart constructor
 
     /**
@@ -85,6 +85,14 @@ class BikePart {
 
 
     /**
+     * Sets the quantity of a bike part
+     * @param quantity a new bike part quantity
+     */
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }// end of set quantity
+
+    /**
      *get bike part name
      * @return part name
      */
@@ -124,5 +132,12 @@ class BikePart {
         return this.onSale;
     }// end of getOnSale
 
+    /**
+     * get bike part Quantity
+     * @return quantity
+     */
+    public int getQuantity(){
+        return this.quantity;
+    }// end of getQuantity 
 
 }//end of BikePart class
