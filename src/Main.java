@@ -7,19 +7,23 @@ import java.io.FileInputStream;
 import java.util.Scanner;
 public class Main {
     
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException{
+    FileReader("warehouseDB.txt");
+
+    }
 
 
 
 
-        FileInputStream inFile;
-        inFile = new FileInputStream("warehouseDB.txt");
-        Scanner sc = new Scanner(inFile);
-        while (sc.hasNextLine())
-        {
-            String line = sc.nextLine();
-            System.out.println(line);
+    public static void FileReader (String filename) throws FileNotFoundException{
+            FileInputStream inFile;
+            inFile = new FileInputStream(filename);
+            Scanner sc = new Scanner(inFile);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                
+            }
+            sc.close();
         }
-        sc.close();
-    }//end of PSVM
-}//end of main class
+
+    }
