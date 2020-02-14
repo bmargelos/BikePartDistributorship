@@ -2,7 +2,6 @@
 //Brittany Margelos
 //BRO
 import java.io.IOException;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -21,7 +20,7 @@ public class Main {
 
 
 
-   
+
 
 
         /*        // creating a scanner so a user can enter how many lines they want to put in the program
