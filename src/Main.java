@@ -1,26 +1,32 @@
 //I Pledge
 //Brittany Margelos
 //BRO
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.
 import java.util.Scanner;
+
+import java.io.InputStreamReader
+import java.util.Scanner
 public class Main {
     /**
-     *
-     * @param args
-     *prints how many lines the user enters
-     * printing all parts that cost less than $20
+     * @param args prints how many lines the user enters
+     *             printing all parts that cost less than $20
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException{
+        File inFile = new File("warehouseDB.txt");
+        Scanner sc = new Scanner(inFile);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            System.out.println(line);
+        }
+        sc.close();
+    } // end of PSVM
+}//end of main
 
 
 
 
-
+/**
     }
         public String FileReader() throws FileNotFoundException {
             BufferedReader reader = new BufferedReader(new FileReader("testinventory.txt"))
@@ -36,7 +42,7 @@ public class Main {
                 return content.toString();
             }
         }
-
+//
 
         /*        // creating a scanner so a user can enter how many lines they want to put in the program
         Scanner in = new Scanner(System.in);
@@ -48,8 +54,3 @@ public class Main {
 */
 
 
-
-
-
-    }//end of PSVM
-}//end of Main class
