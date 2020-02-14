@@ -126,7 +126,7 @@ class BikePart {
 
     /**
      *get bike part on sale
-     * @returns true or false depending if bike part is on the sale
+     * @return true or false depending if bike part is on the sale
      */
     public boolean getOnSale() {
         return this.onSale;
@@ -138,6 +138,6 @@ class BikePart {
      */
     public int getQuantity(){
         return this.quantity;
-    }// end of getQuantity 
+    }// end of getQuantity
 
 }//end of BikePart class
