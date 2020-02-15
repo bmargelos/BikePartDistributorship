@@ -25,16 +25,14 @@ public class Main {
             switch(Choice) {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
-                    Scanner in = new Scanner(System.in);
-                    String inFileName = "";
-                    String outFileName = "";
-                    //I realized I should of made a arrayList
-                    String []contents = new String[200];
+                    String inFileName = Input.nextLine();
+
+
                     //ArrayList<BikePart> bp = new ArrayList<>();
+
                     //User enters the name of the file ( in this case "bikeParts.txt")
                     System.out.print("Enter Input FileName ");
-                    inFileName = in.nextLine();
-
+                    inFileName = Input.nextLine();
                     int i = 0;
 
                     //reading in a file
