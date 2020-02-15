@@ -3,15 +3,11 @@ import java.util.ArrayList;
 
 //This Class is in charge of handling Daily Inventory
 public class Inventory {
-    private ArrayList <BikePart> Parts;
+    private BikePart part;
 
-    public void  addPart( BikePart part){
-        Parts.add(part);
+    public Inventory(BikePart Part){
+        this.part = Part;
     }
-
-
-
-
 }
 
 
