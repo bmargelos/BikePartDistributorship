@@ -13,7 +13,6 @@ class BikePart {
     private double price, salesPrice;
     private boolean onSale;
     private int quantity;
-    private ArrayList <BikePart> parts;
     /**
      * This constructs a bike part that has a specified a part name, a part number,
      * the price, the sale price, whether the bike part is on sale, and it's quantity.
@@ -35,7 +34,7 @@ class BikePart {
             onSale = false;
         }
         this.quantity = Integer.parseInt(temp[5]);
-        this.parts = new ArrayList();
+
     }//end of BikePart constructor
 
     /**
@@ -144,9 +143,4 @@ class BikePart {
     public int getQuantity(){
         return this.quantity;
     }
-
-
-
-
-
 }//end of BikePart class

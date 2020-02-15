@@ -1,20 +1,18 @@
 import java.util.ArrayList;
 
 //This Class is in charge of handling Daily Inventory
-public class Inventory {
-ArrayList <BikePart> Inventory = new ArrayList<BikePart>();
-
-
-
-}
-
-
-
-
-
-
-
+public class Warehouse {
+    private ArrayList<BikePart> parts;
 
 
 }
+
+
+
+
+
+
+
+
+
 

@@ -1,13 +1,12 @@
 //I Pledge
 //Brittany Margelos
-
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.io.FileOutputStream;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -17,6 +16,7 @@ public class Main {
     }
 
     public static void Choices(){
+
         Scanner Input = new Scanner(System.in);
         String Choice = "";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -24,6 +24,7 @@ public class Main {
             Choice = Input.next();
             switch(Choice) {
                 case "Read":
+
                     System.out.println("Enter the File you would like to read: ");
                     String inFileName = Input.nextLine();
 
@@ -40,7 +41,7 @@ public class Main {
                         Scanner fIn = new Scanner(new FileInputStream(inFileName));
 
                         while (fIn.hasNext()) {
-                            contents[i] = fIn.nextLine();
+                            //contents[i] = fIn.nextLine();
                             //System.out.print(contents[i]);
                             //System.out.println("Read line "+ (i + 1));
                             i++;
@@ -57,15 +58,13 @@ public class Main {
                 case "SortName":
                 case "SortNumber":
                 case "Quit":
+                    break;
 
             }
 
         }
     }
-
-
-
-        public static void FileReader (String filename) throws FileNotFoundException {
+    public static void FileReader (String filename) throws FileNotFoundException {
             FileInputStream inFile;
             inFile = new FileInputStream(filename);
             Scanner sc = new Scanner(inFile);
