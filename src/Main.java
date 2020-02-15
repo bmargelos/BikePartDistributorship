@@ -32,7 +32,7 @@ public class Main {
                     String []contents = new String[200];
                     //ArrayList<BikePart> bp = new ArrayList<>();
                     //User enters the name of the file ( in this case "bikeParts.txt")
-                    System.out.print("Enter Input FileName:");
+                    System.out.print("Enter Input FileName ");
                     inFileName = in.nextLine();
 
                     int i = 0;
