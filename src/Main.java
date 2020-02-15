@@ -24,7 +24,7 @@ public class Main {
             switch(Choice) {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
-                    
+
                 case "Enter":
                 case "Sell":
                 case "Display":
