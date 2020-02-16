@@ -1,22 +1,24 @@
 //I Pledge
 //Brittany Margelos
-
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         FileReader("warehouseDB.txt");
+        ArrayList <BikePart> Inventory = new ArrayList<BikePart>();
         Choices();
 
     }
 
     public static void Choices() {
+
         Scanner Input = new Scanner(System.in);
         String Choice = " ";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -25,15 +27,12 @@ public class Main {
             switch (Choice) {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
-                    Scanner in = new Scanner(System.in);
-                    String inFileName = "";
-                    //I realized I should of made a arrayList
-                    String[] contents = new String[200];
-                    //ArrayList<BikePart> bp = new ArrayList<>();
+                    String inFileName = Input.nextLine();
+
+
                     //User enters the name of the file ( in this case "bikeParts.txt")
                     System.out.print("Enter Input FileName ");
-                    inFileName = in.nextLine();
-
+                    inFileName = Input.nextLine();
                     int i = 0;
 
                     //reading in a file
@@ -41,10 +40,12 @@ public class Main {
                         Scanner fIn = new Scanner(new FileInputStream(inFileName));
 
                         while (fIn.hasNext()) {
-                            contents[i] = fIn.nextLine();
+                            //contents[i] = fIn.nextLine();
+                            String nextLn = fIn.nextLine();
+
                             //System.out.print(contents[i]);
                             //System.out.println("Read line "+ (i + 1));
-                            i++;
+                            //i++;
                         }
 
                         //catching the file not found error if user enter's wrong file
@@ -58,24 +59,30 @@ public class Main {
                 case "SortName":
                 case "SortNumber":
                 case "Quit":
+                    break;
 
             }
+
 
         }
     }
 
+    public static void FileReader(String filename) throws FileNotFoundException {
+        FileInputStream inFile;
+        inFile = new FileInputStream(filename);
+        Scanner sc = new Scanner(inFile);
 
-        public static void FileReader (String filename) throws FileNotFoundException {
-            FileInputStream inFile;
-            inFile = new FileInputStream(filename);
-            Scanner sc = new Scanner(inFile);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
 
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-
-            }
-            sc.close();
         }
+        sc.close();
+
 
     }
+
+
+
+
+}
 
