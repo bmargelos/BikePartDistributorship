@@ -1,22 +1,17 @@
 //I Pledge
 //Brittany Margelos
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.util.Formatter;
+import java.io.*;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+public class Main {
+    public static void main(String[] args) throws IOException{
         FileReader("warehouseDB.txt");
         Choices();
 
-    }
 
-    public static void Choices() {
+    }
+    public static void Choices()throws IOException {
         ArrayList <BikePart> WareHouse = new ArrayList<BikePart>();
         Scanner Input = new Scanner(System.in);
         String Choice = "";
@@ -27,11 +22,9 @@ public class Main {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
                     String inFileName = Input.nextLine();
-                    //User enters the name of the file ( in this case "bikeParts.txt")
-                    System.out.print("Enter Input FileName ");
+                    //User enters the name of the file ( in this case "inventory2.txt")
                     inFileName = Input.nextLine();
                     int i = 0;
-
                     //reading in a file
                     try {
                         Scanner fIn = new Scanner(new FileInputStream(inFileName));
@@ -48,14 +41,10 @@ public class Main {
                                 BikePart Current = WareHouse.get(index);
                                 Current.setQuantity(Current.getQuantity() + nxtPart.getQuantity() );
                             }
-
-
-
                             //System.out.print(contents[i]);
-                            //System.out.println("Read line "+ (i + 1));
                             //i++;
                         }
-
+                        System.out.println("Read line "+ inFileName + " was read successfully. \n");
                         //catching the file not found error if user enter's wrong file
                     } catch (FileNotFoundException e) {
                         System.err.println("File " + inFileName + " does not exist.");
@@ -63,12 +52,22 @@ public class Main {
 
                 case "Enter":
 
+
                 case "Sell":
                 case "Display":
                 case "SortName":
                 case "SortNumber":
                 case "Quit":
-                    break;
+                    File FileOut = new File("warehouseDB.txt");
+                    FileWriter fWriter = new FileWriter(FileOut);
+                    PrintWriter pWriter = new PrintWriter(fWriter);
+
+                    int Length = WareHouse.size();
+                    for(int f = 0; f< Length;f++){
+                        String Info = WareHouse.get(f).getInfo();
+                        pWriter.println(Info);
+                    }
+                    pWriter.close();
 
             }
 
@@ -97,6 +96,7 @@ public class Main {
         BikePart newPart = new BikePart(info);
         return newPart;
     }
+
 
 
 

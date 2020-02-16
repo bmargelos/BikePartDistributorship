@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 class BikePart {
     private String partName;
+    private String Info;
     private int partNumber;
     private double price, salesPrice;
     private boolean onSale;
@@ -20,10 +21,11 @@ class BikePart {
      * A string array called "temp" that when the info is passed through, it will split at the ",".
      * Each current object of the info constructor will be saved into a specific index of temp array
      *
-     * @param info stores all the biker part info
      */
 
+
     public BikePart(String info) {
+        this.Info = info;
         String[] temp = info.split(",");
         this.partName = temp[0];
         this.partNumber = Integer.parseInt(temp[1]);
@@ -38,6 +40,9 @@ class BikePart {
         this.part = new ArrayList<BikePart>();
 
     }//end of BikePart constructor
+    public String getInfo(){
+        return this.Info;
+    }
 
     /**
      * To set a part name to bike part
