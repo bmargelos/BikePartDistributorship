@@ -35,7 +35,7 @@ class BikePart {
             onSale = false;
         }
         this.quantity = Integer.parseInt(temp[5]);
-        this.part = new ArrayList();
+        this.part = new ArrayList<BikePart>();
 
     }//end of BikePart constructor
 

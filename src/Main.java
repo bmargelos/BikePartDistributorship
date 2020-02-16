@@ -12,14 +12,12 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         FileReader("warehouseDB.txt");
-        ArrayList <BikePart> Inventory = new ArrayList<BikePart>();
-
         Choices();
 
     }
 
     public static void Choices() {
-
+        ArrayList <BikePart> WareHouse = new ArrayList<BikePart>();
         Scanner Input = new Scanner(System.in);
         String Choice = "";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -29,8 +27,6 @@ public class Main {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
                     String inFileName = Input.nextLine();
-
-
                     //User enters the name of the file ( in this case "bikeParts.txt")
                     System.out.print("Enter Input FileName ");
                     inFileName = Input.nextLine();
@@ -43,6 +39,17 @@ public class Main {
                         while (fIn.hasNext()) {
                             //contents[i] = fIn.nextLine();
                             String nextLn = fIn.nextLine();
+                            BikePart nxtPart = partConstructor(nextLn);
+                            boolean Present = ifPresent(WareHouse,nxtPart);
+                            if(!Present){
+                                WareHouse.add(nxtPart);
+                            }else{
+                                int index = WareHouse.indexOf(nxtPart.getPartNumber());
+                                BikePart Current = WareHouse.get(index);
+                                Current.setQuantity(Current.getQuantity() + nxtPart.getQuantity() );
+                            }
+
+
 
                             //System.out.print(contents[i]);
                             //System.out.println("Read line "+ (i + 1));
@@ -55,6 +62,7 @@ public class Main {
                     }// end of catch FileNotFoundException
 
                 case "Enter":
+
                 case "Sell":
                 case "Display":
                 case "SortName":
@@ -75,11 +83,19 @@ public class Main {
 
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
+            BikePart newPart = new BikePart(line);
 
         }
         sc.close();
 
 
+    }
+    public static boolean ifPresent(ArrayList<BikePart> list,BikePart Part){
+        return list.contains(Part);
+    }
+    public static BikePart partConstructor(String info){
+        BikePart newPart = new BikePart(info);
+        return newPart;
     }
 
 
