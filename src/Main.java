@@ -16,19 +16,19 @@ public class Main {
 
     }
 
-    public static void Choices(){
+    public static void Choices() {
         Scanner Input = new Scanner(System.in);
         String Choice = " ";
         while (!Choice.equalsIgnoreCase("Quit")) {
             System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name \n" + "Enter a choice:");
             Choice = Input.next();
-            switch(Choice) {
+            switch (Choice) {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
                     Scanner in = new Scanner(System.in);
                     String inFileName = "";
                     //I realized I should of made a arrayList
-                    String []contents = new String[200];
+                    String[] contents = new String[200];
                     //ArrayList<BikePart> bp = new ArrayList<>();
                     //User enters the name of the file ( in this case "bikeParts.txt")
                     System.out.print("Enter Input FileName ");
@@ -63,7 +63,6 @@ public class Main {
 
         }
     }
-
 
 
         public static void FileReader (String filename) throws FileNotFoundException {
