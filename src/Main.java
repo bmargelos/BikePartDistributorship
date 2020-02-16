@@ -51,7 +51,7 @@ public class Main {
                     }// end of catch FileNotFoundException
 
                 case "Enter":
-
+                    
 
                 case "Sell":
                 case "Display":
