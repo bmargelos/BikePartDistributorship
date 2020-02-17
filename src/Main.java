@@ -1,23 +1,18 @@
 //I Pledge
 //Brittany Margelos
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.util.Formatter;
+import java.io.*;
+import java.util.List;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    static List<BikePart> Inventory;
+    public static void main(String[] args) throws IOException {
         // FileReader("warehouseDB.txt");
-        ArrayList<BikePart> Inventory = new ArrayList<BikePart>();
-        Choices();
-
+        Inventory = LoadInventory();
     }
 
-    public static void Choices() throws FileNotFoundException {
+    public static void Choices() throws IOException {
 
         Scanner Input = new Scanner(System.in);
         String Choice = " ";
@@ -37,8 +32,6 @@ public class Main {
                     break;
 
             }
-
-
         }
     }
 
@@ -62,37 +55,68 @@ public class Main {
             System.err.println("File " + inFileName + " does not exist.");
         }// end of catch FileNotFoundException
     }
-    private static void enterCase() throws FileNotFoundException {
+    private static void enterCase() throws IOException {
+        BikePart bikePart = new BikePart();
         Scanner Input = new Scanner(System.in);
         System.out.print("Enter partname: ");
-        String partName = Input.nextLine();
+        bikePart.setName(Input.nextLine());
         System.out.print("Enter partnum: ");
-        int partNum = Integer.parseInt(Input.nextLine());
+        bikePart.setPartNumber(Integer.parseInt(Input.nextLine()));//int partNum = Integer.parseInt(Input.nextLine());
         System.out.print("Enter price: ");
-        double price = Double.parseDouble(Input.nextLine());
+        bikePart.setPrice(Double.parseDouble(Input.nextLine()));//double price = Double.parseDouble(Input.nextLine());
         System.out.print("Enter sales price: ");
-        double salesPrice = Double.parseDouble(Input.nextLine());
+        bikePart.setPricesSales(Double.parseDouble(Input.nextLine()));//double salesPrice = Double.parseDouble(Input.nextLine());
         System.out.print("Enter onsale (true or false): ");
-        boolean onsale = Boolean.parseBoolean(Input.nextLine());
+        bikePart.setOnSale(Boolean.parseBoolean(Input.nextLine()));//boolean onsale = Boolean.parseBoolean(Input.nextLine());
         System.out.print("Enter warehouse quantity: ");
-        int quantity = Integer.parseInt(Input.nextLine());
-
-
+        bikePart.setQuantity(Integer.parseInt(Input.nextLine()));//int quantity = Integer.parseInt(Input.nextLine());
+        processInfo(bikePart);
     }
 
+    static void processInfo(BikePart bikePart) throws IOException {
 
-        public static void FileReader (String inFileName) throws FileNotFoundException {
-            FileInputStream inFile;
-            inFile = new FileInputStream(inFileName);
-            Scanner sc = new Scanner(inFile);
+        FileWriter writer = new FileWriter("warehouseDB.txt", true);
+        boolean existPart = false;
 
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
+        for (BikePart  bikePartTmp: Inventory ) {
+            //System.out.println(bikePartTmp.getName());
+            if(bikePartTmp.getName().equals(bikePart.getName())){
+                existPart = true;
+                writer.write(bikePart.getName()+","+bikePart.getPartNumber()+","+bikePart.getPrice()+","+bikePart.getSalesPrice()+","+bikePart.getOnSale()+","+bikePart.getQuantity()+"\n");
+            }else{
+                writer.write(bikePartTmp.getName()+","+bikePartTmp.getPartNumber()+","+bikePartTmp.getPrice()+","+bikePartTmp.getSalesPrice()+","+bikePartTmp.getOnSale()+","+bikePartTmp.getQuantity()+"\n");
             }
-            sc.close();
-
         }
 
+        //add if not exist
+        if(!existPart){
+            writer.write(bikePart.getName()+","+bikePart.getPartNumber()+","+bikePart.getPrice()+","+bikePart.getSalesPrice()+","+bikePart.getOnSale()+","+bikePart.getQuantity()+"\n");
+        }
 
+        writer.close();
     }
 
+    public static void FileReader (String inFileName) throws FileNotFoundException {
+        FileInputStream inFile;
+        inFile = new FileInputStream(inFileName);
+        Scanner sc = new Scanner(inFile);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+        }
+        sc.close();
+    }
+
+    public static List<BikePart> LoadInventory() throws FileNotFoundException {
+        List<BikePart> lstTemp = new ArrayList<>();
+
+        Scanner sc = new Scanner(new File("inventory.txt"));
+
+        while (sc.hasNextLine())
+            lstTemp.add(new BikePart(sc.nextLine()));
+
+        return lstTemp;
+    }
+
+
+}
