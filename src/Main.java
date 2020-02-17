@@ -1,18 +1,30 @@
-//I Pledge
+//I Pledge...
 //Brittany Margelos
+//Ben Hichak
+//Luis Maldonado
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
+    /**
+     *
+     * @param args main
+     * @throws IOException for the switch statement choices
+     */
     public static void main(String[] args) throws IOException {
         Choices();
 
     }
 
+    /**
+     *
+     * @throws IOException for reading in a file
+     */
     public static void Choices() throws IOException {
         ArrayList<BikePart> WareHouse = new ArrayList<BikePart>();
         FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
@@ -60,25 +72,26 @@ public class Main {
                     System.out.println("Please enter the Part Number: ");
                     int PartNumber = Input.nextInt();
                     int uIndex = 0;
-                    for(int d = 0; d <WareHouse.size();d++){
+                    for (int d = 0; d < WareHouse.size(); d++) {
                         int pNumb = WareHouse.get(d).getPartNumber();
-                        if(pNumb == PartNumber){
-                            uIndex = getIndex(WareHouse,WareHouse.get(d));
-                        }else{
+                        if (pNumb == PartNumber) {
+                            uIndex = getIndex(WareHouse, WareHouse.get(d));
+                        } else {
                             System.err.println("The part is not available");
                         }
+
                     }
                     double sPrice = 0;
                     boolean isSal = WareHouse.get(uIndex).getOnSale();
-                    if(isSal){
+                    if (isSal) {
                         sPrice = WareHouse.get(uIndex).getSalesPrice();
-                    }else{
+                    } else {
                         sPrice = WareHouse.get(uIndex).getPrice();
                     }
                     System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
-                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity()-1);
+                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
                     System.out.println(calObj.getTime());
-                        break;
+                    break;
                 case "Display":
                     System.out.println("Enter the Part Name: ");
                     String pName = Input.next();
@@ -86,7 +99,7 @@ public class Main {
                     boolean isSale = false;
                     boolean Found = false;
                     double pDisplay = 0.0;
-                    for(int l = 0; l < WareHouse.size();l++) {
+                    for (int l = 0; l < WareHouse.size(); l++) {
                         String cName = WareHouse.get(l).getName();
                         if (cName.equals(pName)) {
                             nIndex = getIndex(WareHouse, WareHouse.get(l));
@@ -100,36 +113,70 @@ public class Main {
 
                         }
                     }
-                    if(!Found){
+                    if (!Found) {
                         System.err.println("The part was not found \n");
-                    }else{
-                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay +"\n");
+                    } else {
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + "\n");
                     }
 
                     break;
                 case "SortName":
-                    
-                    break;
-                case "SortNumber":
-                    break;
-                case "Quit":
-                    File FileOut = new File("warehouseDB.txt");
-                    FileWriter fWriter = new FileWriter(FileOut);
-                    PrintWriter pWriter = new PrintWriter(fWriter);
-                    for (int k = 0;k < WareHouse.size();k++) {
-                        pWriter.println(WareHouse.get(k).getInfo());
+
+                    ArrayList <String> nameSort = new ArrayList();
+                    for (int a = 0; a < WareHouse.size(); a++) {
+                        String nextstr = WareHouse.get(a).getInfo();
+                        nameSort.add(nextstr);
                     }
-                    pWriter.close();
+                    Collections.sort(nameSort);
+                    for(int b =0; b< WareHouse.size();b++){
+                        System.out.println(nameSort.get(b));
+                    }
+                    System.out.println("");
                     break;
-            }
+
+                    case "SortNumber":
+                        int count = 0;
+                        while(count < 50) {
+                            for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
+                                int Temp1 = WareHouse.get(a).getPartNumber();
+                                int Temp2 = WareHouse.get(b).getPartNumber();
+                                if (Temp1 > Temp2){
+                                    Collections.swap(WareHouse,a,b);
+                                }
+                            }
+                            count++;
+                        }
+                        for(int a =0 ; a < WareHouse.size();a++){
+                            System.out.println(WareHouse.get(a).getInfo());
+                        }
+                        System.out.println("");
+                        break;
+                    case "Quit":
+                        File FileOut = new File("warehouseDB.txt");
+                        FileWriter fWriter = new FileWriter(FileOut);
+                        PrintWriter pWriter = new PrintWriter(fWriter);
+                        for (int k = 0; k < WareHouse.size(); k++) {
+                            pWriter.println(WareHouse.get(k).getInfo());
+                        }
+                        pWriter.close();
+                        break;
+                }
 
 
             }
         }
-        public static int getIndex(ArrayList list, BikePart part){
+
+    /**
+     *
+     * @param list of a arrayList indices
+     * @param part bike part array of parts
+     * @return the array list parts
+     */
+        public static int getIndex (ArrayList list, BikePart part){
             return list.indexOf(part);
         }
-}
+    }
+
 
 
 

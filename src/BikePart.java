@@ -1,6 +1,7 @@
 //creating a BikePart class
 import java.util.ArrayList;
 /**
+ * I Pledge....
  * This class stores information about a bike part
  * @author Brittany Margelos
  * @author Benjamin Hichak
@@ -17,7 +18,7 @@ class BikePart {
     private ArrayList<BikePart> part;
     /**
      * This constructs a bike part that has a specified a part name, a part number,
-     * the price, the sale price, whether the bike part is on sale, and it's quantity.
+     * the price, the sale price, whether the bike part is on sale, quantity, and arrayList of bike parts
      * A string array called "temp" that when the info is passed through, it will split at the ",".
      * Each current object of the info constructor will be saved into a specific index of temp array
      *
@@ -92,6 +93,10 @@ class BikePart {
         this.onSale = onSale;
     }//end of onSale
 
+    /**
+     * To set the quantity of the bike part
+     * @param quantity of a bike part
+     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
