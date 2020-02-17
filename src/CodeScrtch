@@ -13,3 +13,35 @@
     public static BikePart partConstructor(String info){
         BikePart newPart = new BikePart(info);
         return newPart;
+
+        while (fIn.hasNext()) {
+                                    String nextLn = fIn.nextLine();
+                                    BikePart nxtPart = new BikePart(nextLn);
+                                    for (BikePart Part : WareHouse) {
+                                            if (Part.getPartNumber() == nxtPart.getPartNumber()){
+                                                Part.setQuantity(Part.getQuantity() + nxtPart.getQuantity());
+                                            } else {
+                                                WareHouse.add(nxtPart);
+                                            }
+                                        }
+
+                                }
+
+                         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                                             Calendar calObj = Calendar.getInstance();
+                                             System.out.println("Please enter the Part Number: ");
+                                             int PartNumber = Input.nextInt();
+                                             System.out.println("How many items will be sold?: ");
+                                             int PartsSold = Input.nextInt();
+                                             if(WareHouse.size() > 0) {
+                                                 for (BikePart part : WareHouse) {
+                                                     if (part.getPartNumber() == PartNumber) {
+                                                         part.setQuantity(part.getQuantity() - PartsSold);
+                                                         System.out.println("Time Sold at: " + calObj.getTime());
+                                                     } else {
+                                                         System.out.println("Part is not Available");
+                                                     }
+                                                 }
+                                             }else{
+                                                 System.out.println("Part is not available");
+                                             }

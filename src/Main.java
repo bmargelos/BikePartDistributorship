@@ -8,16 +8,17 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Choices();
 
     }
-    public static void Choices()throws IOException {
-        ArrayList <BikePart> WareHouse = new ArrayList<BikePart>();
+
+    public static void Choices() throws IOException {
+        ArrayList<BikePart> WareHouse = new ArrayList<BikePart>();
         FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
         Scanner readLn = new Scanner(fileIn);
         fileIn.close();
-        while(readLn.hasNext()){
+        while (readLn.hasNext()) {
             String nLine = readLn.nextLine();
             BikePart dbPart = new BikePart(nLine);
             WareHouse.add(dbPart);
@@ -38,15 +39,9 @@ public class Main {
                         while (fIn.hasNext()) {
                             String nextLn = fIn.nextLine();
                             BikePart nxtPart = new BikePart(nextLn);
-                            //hey we still need to know if a Part is in the array
-                            for(BikePart Part : WareHouse){
-                                if(Part.getPartNumber() == nxtPart.getPartNumber()){
-                                    Part.setQuantity(Part.getQuantity()+nxtPart.getQuantity());
-                                }else{
-                                    WareHouse.add(nxtPart);
-                                }
-                            }
+                            WareHouse.add(nxtPart);
                         }
+
                         System.out.println("Read line " + inFileName + " was read successfully. \n");
                     } catch (FileNotFoundException e) {
                         System.err.println("File " + inFileName + " does not exist.");
@@ -55,6 +50,8 @@ public class Main {
                     break;
                 case "Enter":
                     System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
+                    WareHouse.add(new BikePart(Input.next()));
+                    System.out.println(WareHouse.size());
                     break;
                 case "Sell":
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -63,7 +60,6 @@ public class Main {
                     int PartNumber = Input.nextInt();
                     System.out.println("How many items will be sold?: ");
                     int PartsSold = Input.nextInt();
-                    if(WareHouse.size() > 0) {
                         for (BikePart part : WareHouse) {
                             if (part.getPartNumber() == PartNumber) {
                                 part.setQuantity(part.getQuantity() - PartsSold);
@@ -72,11 +68,26 @@ public class Main {
                                 System.out.println("Part is not Available");
                             }
                         }
-                    }else{
-                        System.out.println("Part is not available");
-                    }
-                    break;
+                        break;
                 case "Display":
+                    System.out.println("Enter the Part Name: ");
+                    String pName = Input.next();
+                    int nIndex = 0;
+                    boolean isSale = false;
+                    double pDisplay = 0.0;
+                    for(int l = 0; l < WareHouse.size();l++){
+                        String cName = WareHouse.get(l).getName();
+                        if(cName.equals(pName)) {
+                            nIndex = getIndex(WareHouse, WareHouse.get(l));
+                            isSale = WareHouse.get(nIndex).getOnSale();
+                            if(isSale){
+                                pDisplay = WareHouse.get(nIndex).getSalesPrice();
+                            }else{
+                                pDisplay = WareHouse.get(nIndex).getPrice();
+                            }
+                        }
+                    }
+                    System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay +"\n");
                     break;
                 case "SortName":
                     break;
@@ -86,17 +97,20 @@ public class Main {
                     File FileOut = new File("warehouseDB.txt");
                     FileWriter fWriter = new FileWriter(FileOut);
                     PrintWriter pWriter = new PrintWriter(fWriter);
-                    if(WareHouse.size() > 0){
-                        for (BikePart bikePart : WareHouse) {
-                            pWriter.println(bikePart.getInfo());
-                        }
+                    for (int k = 0;k < WareHouse.size();k++) {
+                        pWriter.println(WareHouse.get(k).getInfo());
                     }
                     pWriter.close();
                     break;
             }
 
 
+            }
         }
-    }
+        public static int getIndex(ArrayList list, BikePart part){
+            return list.indexOf(part);
+        }
 }
+
+
 
