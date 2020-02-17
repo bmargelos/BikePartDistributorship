@@ -1,18 +1,27 @@
 //I Pledge
 //Brittany Margelos
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException{
-        FileReader("warehouseDB.txt");
         Choices();
-
 
     }
     public static void Choices()throws IOException {
         ArrayList <BikePart> WareHouse = new ArrayList<BikePart>();
+        FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
+        Scanner readLn = new Scanner(fileIn);
+        fileIn.close();
+        while(readLn.hasNext()){
+            String nLine = readLn.nextLine();
+            BikePart dbPart = new BikePart(nLine);
+            WareHouse.add(dbPart);
+        }
         Scanner Input = new Scanner(System.in);
         String Choice = "";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -21,85 +30,73 @@ public class Main {
             switch (Choice) {
                 case "Read":
                     System.out.println("Enter the File you would like to read: ");
-                    String inFileName = Input.nextLine();
+                    String inFileName = Input.next();
                     //User enters the name of the file ( in this case "inventory2.txt")
-                    inFileName = Input.nextLine();
-                    int i = 0;
                     //reading in a file
                     try {
                         Scanner fIn = new Scanner(new FileInputStream(inFileName));
-
                         while (fIn.hasNext()) {
-                            //contents[i] = fIn.nextLine();
                             String nextLn = fIn.nextLine();
-                            BikePart nxtPart = partConstructor(nextLn);
-                            boolean Present = ifPresent(WareHouse,nxtPart);
-                            if(!Present){
-                                WareHouse.add(nxtPart);
-                            }else{
-                                int index = WareHouse.indexOf(nxtPart.getPartNumber());
-                                BikePart Current = WareHouse.get(index);
-                                Current.setQuantity(Current.getQuantity() + nxtPart.getQuantity() );
+                            BikePart nxtPart = new BikePart(nextLn);
+                            //hey we still need to know if a Part is in the array
+                            for(BikePart Part : WareHouse){
+                                if(Part.getPartNumber() == nxtPart.getPartNumber()){
+                                    Part.setQuantity(Part.getQuantity()+nxtPart.getQuantity());
+                                }else{
+                                    WareHouse.add(nxtPart);
+                                }
                             }
-                            //System.out.print(contents[i]);
-                            //i++;
                         }
-                        System.out.println("Read line "+ inFileName + " was read successfully. \n");
-                        //catching the file not found error if user enter's wrong file
+                        System.out.println("Read line " + inFileName + " was read successfully. \n");
                     } catch (FileNotFoundException e) {
                         System.err.println("File " + inFileName + " does not exist.");
                     }// end of catch FileNotFoundException
-
+                    System.out.println(WareHouse.size());
+                    break;
                 case "Enter":
-                    
-
+                    System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
+                    break;
                 case "Sell":
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Calendar calObj = Calendar.getInstance();
+                    System.out.println("Please enter the Part Number: ");
+                    int PartNumber = Input.nextInt();
+                    System.out.println("How many items will be sold?: ");
+                    int PartsSold = Input.nextInt();
+                    if(WareHouse.size() > 0) {
+                        for (BikePart part : WareHouse) {
+                            if (part.getPartNumber() == PartNumber) {
+                                part.setQuantity(part.getQuantity() - PartsSold);
+                                System.out.println("Time Sold at: " + calObj.getTime());
+                            } else {
+                                System.out.println("Part is not Available");
+                            }
+                        }
+                    }else{
+                        System.out.println("Part is not available");
+                    }
+                    break;
                 case "Display":
+                    break;
                 case "SortName":
+                    break;
                 case "SortNumber":
+                    break;
                 case "Quit":
                     File FileOut = new File("warehouseDB.txt");
                     FileWriter fWriter = new FileWriter(FileOut);
                     PrintWriter pWriter = new PrintWriter(fWriter);
-
-                    int Length = WareHouse.size();
-                    for(int f = 0; f< Length;f++){
-                        String Info = WareHouse.get(f).getInfo();
-                        pWriter.println(Info);
+                    if(WareHouse.size() > 0){
+                        for (BikePart bikePart : WareHouse) {
+                            pWriter.println(bikePart.getInfo());
+                        }
                     }
                     pWriter.close();
-
+                    break;
             }
 
 
         }
     }
-
-    public static void FileReader(String filename) throws FileNotFoundException {
-        FileInputStream inFile;
-        inFile = new FileInputStream(filename);
-        Scanner sc = new Scanner(inFile);
-
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            BikePart newPart = new BikePart(line);
-
-        }
-        sc.close();
-
-
-    }
-    public static boolean ifPresent(ArrayList<BikePart> list,BikePart Part){
-        return list.contains(Part);
-    }
-    public static BikePart partConstructor(String info){
-        BikePart newPart = new BikePart(info);
-        return newPart;
-    }
-
-
-
-
-
 }
 
