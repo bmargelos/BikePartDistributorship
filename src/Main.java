@@ -17,12 +17,13 @@ public class Main {
         ArrayList<BikePart> WareHouse = new ArrayList<BikePart>();
         FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
         Scanner readLn = new Scanner(fileIn);
-        fileIn.close();
+
         while (readLn.hasNext()) {
             String nLine = readLn.nextLine();
             BikePart dbPart = new BikePart(nLine);
             WareHouse.add(dbPart);
         }
+        fileIn.close();
         Scanner Input = new Scanner(System.in);
         String Choice = "";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -58,38 +59,56 @@ public class Main {
                     Calendar calObj = Calendar.getInstance();
                     System.out.println("Please enter the Part Number: ");
                     int PartNumber = Input.nextInt();
-                    System.out.println("How many items will be sold?: ");
-                    int PartsSold = Input.nextInt();
-                        for (BikePart part : WareHouse) {
-                            if (part.getPartNumber() == PartNumber) {
-                                part.setQuantity(part.getQuantity() - PartsSold);
-                                System.out.println("Time Sold at: " + calObj.getTime());
-                            } else {
-                                System.out.println("Part is not Available");
-                            }
+                    int uIndex = 0;
+                    for(int d = 0; d <WareHouse.size();d++){
+                        int pNumb = WareHouse.get(d).getPartNumber();
+                        if(pNumb == PartNumber){
+                            uIndex = getIndex(WareHouse,WareHouse.get(d));
+                        }else{
+                            System.err.println("The part is not available");
                         }
+                    }
+                    double sPrice = 0;
+                    boolean isSal = WareHouse.get(uIndex).getOnSale();
+                    if(isSal){
+                        sPrice = WareHouse.get(uIndex).getSalesPrice();
+                    }else{
+                        sPrice = WareHouse.get(uIndex).getPrice();
+                    }
+                    System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity()-1);
+                    System.out.println(calObj.getTime());
                         break;
                 case "Display":
                     System.out.println("Enter the Part Name: ");
                     String pName = Input.next();
                     int nIndex = 0;
                     boolean isSale = false;
+                    boolean Found = false;
                     double pDisplay = 0.0;
-                    for(int l = 0; l < WareHouse.size();l++){
+                    for(int l = 0; l < WareHouse.size();l++) {
                         String cName = WareHouse.get(l).getName();
-                        if(cName.equals(pName)) {
+                        if (cName.equals(pName)) {
                             nIndex = getIndex(WareHouse, WareHouse.get(l));
                             isSale = WareHouse.get(nIndex).getOnSale();
-                            if(isSale){
+                            Found = true;
+                            if (isSale) {
                                 pDisplay = WareHouse.get(nIndex).getSalesPrice();
-                            }else{
+                            } else {
                                 pDisplay = WareHouse.get(nIndex).getPrice();
                             }
+
                         }
                     }
-                    System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay +"\n");
+                    if(!Found){
+                        System.err.println("The part was not found \n");
+                    }else{
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay +"\n");
+                    }
+
                     break;
                 case "SortName":
+                    
                     break;
                 case "SortNumber":
                     break;
