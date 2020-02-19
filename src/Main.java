@@ -18,7 +18,6 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         Choices();
-
     }
 
     /**
@@ -72,25 +71,29 @@ public class Main {
                     System.out.println("Please enter the Part Number: ");
                     int PartNumber = Input.nextInt();
                     int uIndex = 0;
+                    boolean found = false;
                     for (int d = 0; d < WareHouse.size(); d++) {
                         int pNumb = WareHouse.get(d).getPartNumber();
                         if (pNumb == PartNumber) {
                             uIndex = getIndex(WareHouse, WareHouse.get(d));
-                        } else {
-                            System.err.println("The part is not available");
+                            found = true;
                         }
-
                     }
-                    double sPrice = 0;
-                    boolean isSal = WareHouse.get(uIndex).getOnSale();
-                    if (isSal) {
-                        sPrice = WareHouse.get(uIndex).getSalesPrice();
-                    } else {
-                        sPrice = WareHouse.get(uIndex).getPrice();
+                    if(found) {
+                        double sPrice = 0;
+                        boolean isSal = WareHouse.get(uIndex).getOnSale();
+                        if (isSal) {
+                            sPrice = WareHouse.get(uIndex).getSalesPrice();
+                        } else {
+                            sPrice = WareHouse.get(uIndex).getPrice();
+                        }
+                        System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                        int pQuant = WareHouse.get(uIndex).getQuantity();
+                        WareHouse.get(uIndex).setQuantity(pQuant - 1);
+                        System.out.println("Time Sold:  " + calObj.getTime() + "\n");
+                    }else{
+                        System.out.println("Part was not found!"+ "\n");
                     }
-                    System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
-                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
-                    System.out.println(calObj.getTime());
                     break;
                 case "Display":
                     System.out.println("Enter the Part Name: ");
