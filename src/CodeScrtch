@@ -1,0 +1,15 @@
+ public static void FileReader(String filename,ArrayList aList) throws FileNotFoundException {
+        FileInputStream inFile;
+        inFile = new FileInputStream(filename);
+        Scanner sc = new Scanner(inFile);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            BikePart newPart = new BikePart(line);
+            aList.add(newPart);
+        }
+        sc.close();
+    }
+
+    public static BikePart partConstructor(String info){
+        BikePart newPart = new BikePart(info);
+        return newPart;

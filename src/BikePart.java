@@ -20,9 +20,8 @@ class BikePart {
      * A string array called "temp" that when the info is passed through, it will split at the ",".
      * Each current object of the info constructor will be saved into a specific index of temp array
      *
+     * @param info stores all the biker part info
      */
-
-    public BikePart(){}
 
     public BikePart(String info) {
         String[] temp = info.split(",");
@@ -39,7 +38,6 @@ class BikePart {
         this.part = new ArrayList();
 
     }//end of BikePart constructor
-
 
     /**
      * To set a part name to bike part
@@ -147,4 +145,6 @@ class BikePart {
     public int getQuantity(){
         return this.quantity;
     }
+
+
 }//end of BikePart class
