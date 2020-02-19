@@ -1,27 +1,41 @@
-//I Pledge
+//I Pledge...
 //Brittany Margelos
+//Ben Hichak
+//Luis Maldonado
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Main {
-    public static void main(String[] args) throws IOException{
+    /**
+     *
+     * @param args main
+     * @throws IOException for the switch statement choices
+     */
+    public static void main(String[] args) throws IOException {
         Choices();
 
     }
-    public static void Choices()throws IOException {
-        ArrayList <BikePart> WareHouse = new ArrayList<BikePart>();
+
+    /**
+     *
+     * @throws IOException for reading in a file
+     */
+    public static void Choices() throws IOException {
+        ArrayList<BikePart> WareHouse = new ArrayList<BikePart>();
         FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
         Scanner readLn = new Scanner(fileIn);
-        fileIn.close();
-        while(readLn.hasNext()){
+
+        while (readLn.hasNext()) {
             String nLine = readLn.nextLine();
             BikePart dbPart = new BikePart(nLine);
             WareHouse.add(dbPart);
         }
+        fileIn.close();
         Scanner Input = new Scanner(System.in);
         String Choice = "";
         while (!Choice.equalsIgnoreCase("Quit")) {
@@ -38,15 +52,9 @@ public class Main {
                         while (fIn.hasNext()) {
                             String nextLn = fIn.nextLine();
                             BikePart nxtPart = new BikePart(nextLn);
-                            //hey we still need to know if a Part is in the array
-                            for(BikePart Part : WareHouse){
-                                if(Part.getPartNumber() == nxtPart.getPartNumber()){
-                                    Part.setQuantity(Part.getQuantity()+nxtPart.getQuantity());
-                                }else{
-                                    WareHouse.add(nxtPart);
-                                }
-                            }
+                            WareHouse.add(nxtPart);
                         }
+
                         System.out.println("Read line " + inFileName + " was read successfully. \n");
                     } catch (FileNotFoundException e) {
                         System.err.println("File " + inFileName + " does not exist.");
@@ -55,48 +63,120 @@ public class Main {
                     break;
                 case "Enter":
                     System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
+                    WareHouse.add(new BikePart(Input.next()));
+                    System.out.println(WareHouse.size());
                     break;
                 case "Sell":
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Calendar calObj = Calendar.getInstance();
                     System.out.println("Please enter the Part Number: ");
                     int PartNumber = Input.nextInt();
-                    System.out.println("How many items will be sold?: ");
-                    int PartsSold = Input.nextInt();
-                    if(WareHouse.size() > 0) {
-                        for (BikePart part : WareHouse) {
-                            if (part.getPartNumber() == PartNumber) {
-                                part.setQuantity(part.getQuantity() - PartsSold);
-                                System.out.println("Time Sold at: " + calObj.getTime());
-                            } else {
-                                System.out.println("Part is not Available");
-                            }
+                    int uIndex = 0;
+                    for (int d = 0; d < WareHouse.size(); d++) {
+                        int pNumb = WareHouse.get(d).getPartNumber();
+                        if (pNumb == PartNumber) {
+                            uIndex = getIndex(WareHouse, WareHouse.get(d));
+                        } else {
+                            System.err.println("The part is not available");
                         }
-                    }else{
-                        System.out.println("Part is not available");
+
                     }
+                    double sPrice = 0;
+                    boolean isSal = WareHouse.get(uIndex).getOnSale();
+                    if (isSal) {
+                        sPrice = WareHouse.get(uIndex).getSalesPrice();
+                    } else {
+                        sPrice = WareHouse.get(uIndex).getPrice();
+                    }
+                    System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
+                    System.out.println(calObj.getTime());
                     break;
                 case "Display":
-                    break;
-                case "SortName":
-                    break;
-                case "SortNumber":
-                    break;
-                case "Quit":
-                    File FileOut = new File("warehouseDB.txt");
-                    FileWriter fWriter = new FileWriter(FileOut);
-                    PrintWriter pWriter = new PrintWriter(fWriter);
-                    if(WareHouse.size() > 0){
-                        for (BikePart bikePart : WareHouse) {
-                            pWriter.println(bikePart.getInfo());
+                    System.out.println("Enter the Part Name: ");
+                    String pName = Input.next();
+                    int nIndex = 0;
+                    boolean isSale = false;
+                    boolean Found = false;
+                    double pDisplay = 0.0;
+                    for (int l = 0; l < WareHouse.size(); l++) {
+                        String cName = WareHouse.get(l).getName();
+                        if (cName.equals(pName)) {
+                            nIndex = getIndex(WareHouse, WareHouse.get(l));
+                            isSale = WareHouse.get(nIndex).getOnSale();
+                            Found = true;
+                            if (isSale) {
+                                pDisplay = WareHouse.get(nIndex).getSalesPrice();
+                            } else {
+                                pDisplay = WareHouse.get(nIndex).getPrice();
+                            }
+
                         }
                     }
-                    pWriter.close();
+                    if (!Found) {
+                        System.err.println("The part was not found \n");
+                    } else {
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + "\n");
+                    }
+
                     break;
+                case "SortName":
+
+                    ArrayList <String> nameSort = new ArrayList();
+                    for (int a = 0; a < WareHouse.size(); a++) {
+                        String nextstr = WareHouse.get(a).getInfo();
+                        nameSort.add(nextstr);
+                    }
+                    Collections.sort(nameSort);
+                    for(int b =0; b< WareHouse.size();b++){
+                        System.out.println(nameSort.get(b));
+                    }
+                    System.out.println("");
+                    break;
+
+                    case "SortNumber":
+                        int count = 0;
+                        while(count < 50) {
+                            for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
+                                int Temp1 = WareHouse.get(a).getPartNumber();
+                                int Temp2 = WareHouse.get(b).getPartNumber();
+                                if (Temp1 > Temp2){
+                                    Collections.swap(WareHouse,a,b);
+                                }
+                            }
+                            count++;
+                        }
+                        for(int a =0 ; a < WareHouse.size();a++){
+                            System.out.println(WareHouse.get(a).getInfo());
+                        }
+                        System.out.println("");
+                        break;
+                    case "Quit":
+                        File FileOut = new File("warehouseDB.txt");
+                        FileWriter fWriter = new FileWriter(FileOut);
+                        PrintWriter pWriter = new PrintWriter(fWriter);
+                        for (int k = 0; k < WareHouse.size(); k++) {
+                            pWriter.println(WareHouse.get(k).getInfo());
+                        }
+                        pWriter.close();
+                        break;
+                }
+
+
             }
+        }
 
-
+    /**
+     *
+     * @param list of a arrayList indices
+     * @param part bike part array of parts
+     * @return the array list parts
+     */
+        public static int getIndex (ArrayList list, BikePart part){
+            return list.indexOf(part);
         }
     }
-}
+
+
+
 
