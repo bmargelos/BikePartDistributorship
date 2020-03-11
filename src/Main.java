@@ -127,7 +127,8 @@ public class Main {
                     break;
                 case "SORTNAME":
 
-                    ArrayList <String> nameSort = new ArrayList();
+                    /**
+                     ArrayList <String> nameSort = new ArrayList();
                     for (int a = 0; a < WareHouse.size(); a++) {
                         String nextstr = WareHouse.get(a).getInfo();
                         nameSort.add(nextstr);
@@ -137,7 +138,24 @@ public class Main {
                         System.out.println(nameSort.get(b));
                     }
                     System.out.println("");
-                    break;
+                    */
+                    int counts = 0;
+                    while(counts < 50){
+                        for(int a = 0, b =1; b <WareHouse.size(); a++, b++){
+                            String Temp1 = WareHouse.get(a).getName().toUpperCase();
+                            String Temp2 = WareHouse.get(b).getName().toUpperCase();
+                            int Value = Temp1.compareTo(Temp2);
+                            if(Value == 1){
+                                Collections.swap(WareHouse,a,b);
+                            }
+                        }
+                        counts++;
+                    }
+                    for(int a =0 ; a < WareHouse.size();a++) {
+                        System.out.println(WareHouse.get(a).getInfo());
+                    }
+                    System.out.println("");
+                     break;
                     case "SORTNUMBER":
                         int count = 0;
                         while(count < 50) {
