@@ -41,8 +41,9 @@ public class Main {
         while (!Choice.equalsIgnoreCase("Quit")) {
             System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name \n" + "Enter a choice:");
             Choice = Input.next();
+            Choice = Choice.toUpperCase();
             switch (Choice) {
-                case "Read":
+                case "READ":
                     System.out.println("Enter the File you would like to read: ");
                     String inFileName = Input.next();
                     //User enters the name of the file ( in this case "inventory2.txt")
@@ -61,12 +62,12 @@ public class Main {
                     }// end of catch FileNotFoundException
                     System.out.println(WareHouse.size());
                     break;
-                case "Enter":
+                case "ENTER":
                     System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
                     WareHouse.add(new BikePart(Input.next()));
                     System.out.println(WareHouse.size());
                     break;
-                case "Sell":
+                case "SELL":
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Calendar calObj = Calendar.getInstance();
                     System.out.println("Please enter the Part Number: ");
@@ -96,7 +97,7 @@ public class Main {
                         System.out.println("Part was not found!"+ "\n");
                     }
                     break;
-                case "Display":
+                case "DISPLAY":
                     System.out.println("Enter the Part Name: ");
                     String pName = Input.next();
                     int nIndex = 0;
@@ -124,7 +125,7 @@ public class Main {
                     }
 
                     break;
-                case "SortName":
+                case "SORTNAME":
 
                     ArrayList <String> nameSort = new ArrayList();
                     for (int a = 0; a < WareHouse.size(); a++) {
@@ -137,8 +138,7 @@ public class Main {
                     }
                     System.out.println("");
                     break;
-
-                    case "SortNumber":
+                    case "SORTNUMBER":
                         int count = 0;
                         while(count < 50) {
                             for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
@@ -155,7 +155,7 @@ public class Main {
                         }
                         System.out.println("");
                         break;
-                    case "Quit":
+                    case "QUIT":
                         File FileOut = new File("warehouseDB.txt");
                         FileWriter fWriter = new FileWriter(FileOut);
                         PrintWriter pWriter = new PrintWriter(fWriter);
