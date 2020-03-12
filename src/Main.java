@@ -90,12 +90,13 @@ public class Main {
                             sPrice = WareHouse.get(uIndex).getPrice();
                         }
                         System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
-                        int pQuant = WareHouse.get(uIndex).getQuantity();
-                        WareHouse.get(uIndex).setQuantity(pQuant - 1);
+                        WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity()-1);
                         System.out.println("Time Sold:  " + calObj.getTime() + "\n");
+
                     }else{
                         System.out.println("Part was not found!"+ "\n");
                     }
+
                     break;
                 case "DISPLAY":
                     System.out.println("Enter the Part Name: ");
@@ -121,24 +122,11 @@ public class Main {
                     if (!Found) {
                         System.err.println("The part was not found \n");
                     } else {
-                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + "\n");
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay+ " " + WareHouse.get(nIndex).getQuantity() + "\n");
                     }
 
                     break;
                 case "SORTNAME":
-
-                    /**
-                     ArrayList <String> nameSort = new ArrayList();
-                    for (int a = 0; a < WareHouse.size(); a++) {
-                        String nextstr = WareHouse.get(a).getInfo();
-                        nameSort.add(nextstr);
-                    }
-                    Collections.sort(nameSort);
-                    for(int b =0; b< WareHouse.size();b++){
-                        System.out.println(nameSort.get(b));
-                    }
-                    System.out.println("");
-                    */
                     int counts = 0;
                     while(counts < 50){
                         for(int a = 0, b =1; b <WareHouse.size(); a++, b++){
@@ -183,6 +171,7 @@ public class Main {
                         pWriter.close();
                         break;
                 default:
+                    System.out.println("\n" + "Invalid Input!" + "\n" + "Please Enter Another Choice:" + "\n");
 
             }
 

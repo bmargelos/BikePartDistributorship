@@ -79,7 +79,7 @@ class BikePart {
      *
      * @param salesPrice a new bike part sales price
      */
-    public void setPricesSales(double salesPrice) {
+    public void setSalesPrice(double salesPrice) {
 
         this.salesPrice = salesPrice;
     }//end of setting salesPrice
