@@ -145,7 +145,7 @@ public class Main {
                             String Temp1 = WareHouse.get(a).getName().toUpperCase();
                             String Temp2 = WareHouse.get(b).getName().toUpperCase();
                             int Value = Temp1.compareTo(Temp2);
-                            if(Value == 1){
+                            if(Value > 0){
                                 Collections.swap(WareHouse,a,b);
                             }
                         }
