@@ -151,6 +151,8 @@ class BikePart {
     public int getQuantity(){
         return this.quantity;
     }
+
+
     public String getInfo(){
         return (this.partName +","+this.partNumber +","+this.price +","+this.salesPrice +","+this.onSale +","+this.quantity);
     }

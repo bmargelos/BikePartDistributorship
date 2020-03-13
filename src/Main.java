@@ -3,6 +3,7 @@
 //Ben Hichak
 //Luis Maldonado
 import java.io.*;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -52,19 +53,48 @@ public class Main {
                         Scanner fIn = new Scanner(new FileInputStream(inFileName));
                         while (fIn.hasNext()) {
                             String nextLn = fIn.nextLine();
-                            BikePart nxtPart = new BikePart(nextLn);
-                            WareHouse.add(nxtPart);
+                            boolean rfound = false;
+                            int rIndex = 0;
+                            BikePart ePart = new BikePart(nextLn);
+                            for (int d = 0; d < WareHouse.size(); d++) {
+                                int pNext = WareHouse.get(d).getPartNumber();
+                                if(ePart.getPartNumber()==pNext){
+                                    rfound = true;
+                                    rIndex = d;
+                                }
+                            }
+                            if(rfound){
+                                WareHouse.get(rIndex).setQuantity(WareHouse.get(rIndex).getQuantity()+ ePart.getQuantity());
+                            }else{
+                                WareHouse.add(ePart);
+                            }
+
                         }
 
                         System.out.println("Read line " + inFileName + " was read successfully. \n");
                     } catch (FileNotFoundException e) {
                         System.err.println("File " + inFileName + " does not exist.");
+                        System.out.println("");
                     }// end of catch FileNotFoundException
-                    System.out.println(WareHouse.size());
                     break;
                 case "ENTER":
                     System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
-                    WareHouse.add(new BikePart(Input.next()));
+                    String eInfo = Input.next();
+                    boolean efound = false;
+                    int eIndex = 0;
+                    BikePart ePart = new BikePart(eInfo);
+                    for (int d = 0; d < WareHouse.size(); d++) {
+                        int pNext = WareHouse.get(d).getPartNumber();
+                        if(ePart.getPartNumber()==pNext){
+                            efound = true;
+                            eIndex = d;
+                        }
+                        }
+                    if(efound){
+                        WareHouse.get(eIndex).setQuantity(WareHouse.get(eIndex).getQuantity()+ ePart.getQuantity());
+                    }else{
+                        WareHouse.add(ePart);
+                    }
                     System.out.println(WareHouse.size());
                     break;
                 case "SELL":
