@@ -15,18 +15,16 @@ class BikePart {
     private boolean onSale;
     private int quantity;
     private ArrayList<BikePart> part;
-    private String Info;
     /**
      * This constructs a bike part that has a specified a part name, a part number,
      * the price, the sale price, whether the bike part is on sale, quantity, and arrayList of bike parts
      * A string array called "temp" that when the info is passed through, it will split at the ",".
      * Each current object of the info constructor will be saved into a specific index of temp array
      *
-     * @param info stores all the biker part info
      */
 
+
     public BikePart(String info) {
-        this.Info = info;
         String[] temp = info.split(",");
         this.partName = temp[0];
         this.partNumber = Integer.parseInt(temp[1]);
@@ -38,12 +36,10 @@ class BikePart {
             onSale = false;
         }
         this.quantity = Integer.parseInt(temp[5]);
-        this.part = new ArrayList();
+        this.part = new ArrayList<BikePart>();
 
     }//end of BikePart constructor
-    public String getInfo(){
-        return this.Info;
-    }
+
 
     /**
      * To set a part name to bike part
@@ -157,4 +153,7 @@ class BikePart {
     }
 
 
+    public String getInfo(){
+        return (this.partName +","+this.partNumber +","+this.price +","+this.salesPrice +","+this.onSale +","+this.quantity);
+    }
 }//end of BikePart class
