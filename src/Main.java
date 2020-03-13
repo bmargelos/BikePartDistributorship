@@ -58,14 +58,14 @@ public class Main {
                             BikePart ePart = new BikePart(nextLn);
                             for (int d = 0; d < WareHouse.size(); d++) {
                                 int pNext = WareHouse.get(d).getPartNumber();
-                                if(ePart.getPartNumber()==pNext){
+                                if (ePart.getPartNumber() == pNext) {
                                     rfound = true;
                                     rIndex = d;
                                 }
                             }
-                            if(rfound){
-                                WareHouse.get(rIndex).setQuantity(WareHouse.get(rIndex).getQuantity()+ ePart.getQuantity());
-                            }else{
+                            if (rfound) {
+                                WareHouse.get(rIndex).setQuantity(WareHouse.get(rIndex).getQuantity() + ePart.getQuantity());
+                            } else {
                                 WareHouse.add(ePart);
                             }
 
@@ -85,14 +85,14 @@ public class Main {
                     BikePart ePart = new BikePart(eInfo);
                     for (int d = 0; d < WareHouse.size(); d++) {
                         int pNext = WareHouse.get(d).getPartNumber();
-                        if(ePart.getPartNumber()==pNext){
+                        if (ePart.getPartNumber() == pNext) {
                             efound = true;
                             eIndex = d;
                         }
-                        }
-                    if(efound){
-                        WareHouse.get(eIndex).setQuantity(WareHouse.get(eIndex).getQuantity()+ ePart.getQuantity());
-                    }else{
+                    }
+                    if (efound) {
+                        WareHouse.get(eIndex).setQuantity(WareHouse.get(eIndex).getQuantity() + ePart.getQuantity());
+                    } else {
                         WareHouse.add(ePart);
                     }
                     System.out.println(WareHouse.size());
@@ -111,7 +111,7 @@ public class Main {
                             found = true;
                         }
                     }
-                    if(found) {
+                    if (found) {
                         double sPrice = 0;
                         boolean isSal = WareHouse.get(uIndex).getOnSale();
                         if (isSal) {
@@ -120,11 +120,11 @@ public class Main {
                             sPrice = WareHouse.get(uIndex).getPrice();
                         }
                         System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
-                        WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity()-1);
+                        WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
                         System.out.println("Time Sold:  " + calObj.getTime() + "\n");
 
-                    }else{
-                        System.out.println("Part was not found!"+ "\n");
+                    } else {
+                        System.out.println("Part was not found!" + "\n");
                     }
 
                     break;
@@ -152,44 +152,54 @@ public class Main {
                     if (!Found) {
                         System.err.println("The part was not found \n");
                     } else {
-                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay+ " " + WareHouse.get(nIndex).getQuantity() + "\n");
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + " " + WareHouse.get(nIndex).getQuantity() + "\n");
                     }
 
                     break;
                 case "SORTNAME":
-                    int counts = 0;
-                    while(counts < 50){
-                        for(int a = 0, b =1; b <WareHouse.size(); a++, b++){
-                            String Temp1 = WareHouse.get(a).getName().toUpperCase();
-                            String Temp2 = WareHouse.get(b).getName().toUpperCase();
-                            int Value = Temp1.compareTo(Temp2);
-                            if(Value > 0){
-                                Collections.swap(WareHouse,a,b);
-                            }
-                        }
-                        counts++;
-                    }
-                    for(int a =0 ; a < WareHouse.size();a++) {
-                        System.out.println(WareHouse.get(a).getInfo());
-                    }
-                    System.out.println("");
-                     break;
-                    case "SORTNUMBER":
-                        int count = 0;
-                        while(count < 50) {
+                    if (WareHouse.size() > 0) {
+                        int counts = 0;
+                        while (counts < 50) {
                             for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
-                                int Temp1 = WareHouse.get(a).getPartNumber();
-                                int Temp2 = WareHouse.get(b).getPartNumber();
-                                if (Temp1 > Temp2){
-                                    Collections.swap(WareHouse,a,b);
+                                String Temp1 = WareHouse.get(a).getName().toUpperCase();
+                                String Temp2 = WareHouse.get(b).getName().toUpperCase();
+                                int Value = Temp1.compareTo(Temp2);
+                                if (Value > 0) {
+                                    Collections.swap(WareHouse, a, b);
                                 }
                             }
-                            count++;
-                        }
-                        for(int a =0 ; a < WareHouse.size();a++){
-                            System.out.println(WareHouse.get(a).getInfo());
+                            counts++;
                         }
                         System.out.println("");
+                        for (int a = 0; a < WareHouse.size(); a++) {
+                            System.out.println(WareHouse.get(a).getInfo());
+                    }
+                        System.out.println("");
+                    }else{
+                        System.out.println("\n"+"Warehouse is empty." + "\n");
+                    }
+                     break;
+                    case "SORTNUMBER":
+                        if(WareHouse.size() > 0) {
+                            int count = 0;
+                            while (count < 50) {
+                                for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
+                                    int Temp1 = WareHouse.get(a).getPartNumber();
+                                    int Temp2 = WareHouse.get(b).getPartNumber();
+                                    if (Temp1 > Temp2) {
+                                        Collections.swap(WareHouse, a, b);
+                                    }
+                                }
+                                count++;
+                            }
+                            System.out.println("");
+                            for (int a = 0; a < WareHouse.size(); a++) {
+                                System.out.println(WareHouse.get(a).getInfo());
+                            }
+                            System.out.println("");
+                        }else{
+                            System.out.println("\n" +"Warehouse is empty.  :( "+"\n");
+                        }
                         break;
                     case "QUIT":
                         File FileOut = new File("warehouseDB.txt");
