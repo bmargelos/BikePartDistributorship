@@ -25,7 +25,7 @@ public class Main {
      * @throws IOException for reading in a file
      */
     public static void Choices() throws IOException {
-        ArrayList<BikePart> WareHouse = new ArrayList<BikePart>();
+        ArrayList<BikePart> WareHouse = new ArrayList<>();
         FileInputStream fileIn = new FileInputStream("warehouseDB.txt");
         Scanner readLn = new Scanner(fileIn);
 
@@ -188,6 +188,7 @@ public class Main {
         public static int getIndex (ArrayList list, BikePart part){
             return list.indexOf(part);
         }
+
     }
 
 

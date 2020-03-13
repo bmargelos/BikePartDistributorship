@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 class BikePart {
     private String partName;
-    private String Info;
     private int partNumber;
     private double price, salesPrice;
     private boolean onSale;
@@ -26,7 +25,6 @@ class BikePart {
 
 
     public BikePart(String info) {
-        this.Info = info;
         String[] temp = info.split(",");
         this.partName = temp[0];
         this.partNumber = Integer.parseInt(temp[1]);
@@ -41,9 +39,7 @@ class BikePart {
         this.part = new ArrayList<BikePart>();
 
     }//end of BikePart constructor
-    public String getInfo(){
-        return this.Info;
-    }
+
 
     /**
      * To set a part name to bike part
@@ -154,5 +150,8 @@ class BikePart {
      */
     public int getQuantity(){
         return this.quantity;
+    }
+    public String getInfo(){
+        return (this.partName +","+this.partNumber +","+this.price +","+this.salesPrice +","+this.onSale +","+this.quantity);
     }
 }//end of BikePart class
