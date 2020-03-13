@@ -15,6 +15,7 @@ class BikePart {
     private boolean onSale;
     private int quantity;
     private ArrayList<BikePart> part;
+    private String Info;
     /**
      * This constructs a bike part that has a specified a part name, a part number,
      * the price, the sale price, whether the bike part is on sale, quantity, and arrayList of bike parts
@@ -25,6 +26,7 @@ class BikePart {
      */
 
     public BikePart(String info) {
+        this.Info = info;
         String[] temp = info.split(",");
         this.partName = temp[0];
         this.partNumber = Integer.parseInt(temp[1]);
@@ -39,6 +41,9 @@ class BikePart {
         this.part = new ArrayList();
 
     }//end of BikePart constructor
+    public String getInfo(){
+        return this.Info;
+    }
 
     /**
      * To set a part name to bike part
