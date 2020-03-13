@@ -18,7 +18,6 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         Choices();
-
     }
 
     /**
@@ -38,11 +37,13 @@ public class Main {
         fileIn.close();
         Scanner Input = new Scanner(System.in);
         String Choice = "";
+
         while (!Choice.equalsIgnoreCase("Quit")) {
             System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name \n" + "Enter a choice:");
             Choice = Input.next();
+            Choice = Choice.toUpperCase();
             switch (Choice) {
-                case "Read":
+                case "READ":
                     System.out.println("Enter the File you would like to read: ");
                     String inFileName = Input.next();
                     //User enters the name of the file ( in this case "inventory2.txt")
@@ -61,38 +62,43 @@ public class Main {
                     }// end of catch FileNotFoundException
                     System.out.println(WareHouse.size());
                     break;
-                case "Enter":
+                case "ENTER":
                     System.out.println("Enter Bike Part Details by Part Name,Part Number,List Price,Sale Price,Sale Status, Quantity:\nExample: (WTB_saddle,1234567890,33.00,25.58,false,1)");
                     WareHouse.add(new BikePart(Input.next()));
                     System.out.println(WareHouse.size());
                     break;
-                case "Sell":
+                case "SELL":
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                     Calendar calObj = Calendar.getInstance();
                     System.out.println("Please enter the Part Number: ");
                     int PartNumber = Input.nextInt();
                     int uIndex = 0;
+                    boolean found = false;
                     for (int d = 0; d < WareHouse.size(); d++) {
                         int pNumb = WareHouse.get(d).getPartNumber();
                         if (pNumb == PartNumber) {
                             uIndex = getIndex(WareHouse, WareHouse.get(d));
-                        } else {
-                            System.err.println("The part is not available");
+                            found = true;
                         }
+                    }
+                    if(found) {
+                        double sPrice = 0;
+                        boolean isSal = WareHouse.get(uIndex).getOnSale();
+                        if (isSal) {
+                            sPrice = WareHouse.get(uIndex).getSalesPrice();
+                        } else {
+                            sPrice = WareHouse.get(uIndex).getPrice();
+                        }
+                        System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                        WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity()-1);
+                        System.out.println("Time Sold:  " + calObj.getTime() + "\n");
 
+                    }else{
+                        System.out.println("Part was not found!"+ "\n");
                     }
-                    double sPrice = 0;
-                    boolean isSal = WareHouse.get(uIndex).getOnSale();
-                    if (isSal) {
-                        sPrice = WareHouse.get(uIndex).getSalesPrice();
-                    } else {
-                        sPrice = WareHouse.get(uIndex).getPrice();
-                    }
-                    System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
-                    WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
-                    System.out.println(calObj.getTime());
+
                     break;
-                case "Display":
+                case "DISPLAY":
                     System.out.println("Enter the Part Name: ");
                     String pName = Input.next();
                     int nIndex = 0;
@@ -116,25 +122,29 @@ public class Main {
                     if (!Found) {
                         System.err.println("The part was not found \n");
                     } else {
-                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + "\n");
+                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay+ " " + WareHouse.get(nIndex).getQuantity() + "\n");
                     }
 
                     break;
-                case "SortName":
-
-                    ArrayList <String> nameSort = new ArrayList();
-                    for (int a = 0; a < WareHouse.size(); a++) {
-                        String nextstr = WareHouse.get(a).getInfo();
-                        nameSort.add(nextstr);
+                case "SORTNAME":
+                    int counts = 0;
+                    while(counts < 50){
+                        for(int a = 0, b =1; b <WareHouse.size(); a++, b++){
+                            String Temp1 = WareHouse.get(a).getName().toUpperCase();
+                            String Temp2 = WareHouse.get(b).getName().toUpperCase();
+                            int Value = Temp1.compareTo(Temp2);
+                            if(Value > 0){
+                                Collections.swap(WareHouse,a,b);
+                            }
+                        }
+                        counts++;
                     }
-                    Collections.sort(nameSort);
-                    for(int b =0; b< WareHouse.size();b++){
-                        System.out.println(nameSort.get(b));
+                    for(int a =0 ; a < WareHouse.size();a++) {
+                        System.out.println(WareHouse.get(a).getInfo());
                     }
                     System.out.println("");
-                    break;
-
-                    case "SortNumber":
+                     break;
+                    case "SORTNUMBER":
                         int count = 0;
                         while(count < 50) {
                             for (int a = 0, b = 1; b < WareHouse.size(); a++, b++) {
@@ -151,7 +161,7 @@ public class Main {
                         }
                         System.out.println("");
                         break;
-                    case "Quit":
+                    case "QUIT":
                         File FileOut = new File("warehouseDB.txt");
                         FileWriter fWriter = new FileWriter(FileOut);
                         PrintWriter pWriter = new PrintWriter(fWriter);
@@ -160,7 +170,10 @@ public class Main {
                         }
                         pWriter.close();
                         break;
-                }
+                default:
+                    System.out.println("\n" + "Invalid Input!" + "\n" + "Please Enter Another Choice:" + "\n");
+
+            }
 
 
             }
