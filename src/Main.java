@@ -3,7 +3,6 @@
 //Ben Hichak
 //Luis Maldonado
 import java.io.*;
-import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +44,7 @@ public class Main {
             Choice = Choice.toUpperCase();
             switch (Choice) {
                 case "READ":
-                    System.out.println("Enter the File you would like to read: ");
+                    System.out.println("\n"+"Enter the File you would like to read:" );
                     String inFileName = Input.next();
                     //User enters the name of the file ( in this case "inventory2.txt")
                     //reading in a file
@@ -95,7 +94,7 @@ public class Main {
                     } else {
                         WareHouse.add(ePart);
                     }
-                    System.out.println(WareHouse.size());
+                    System.out.println("");
                     break;
                 case "SELL":
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -119,12 +118,12 @@ public class Main {
                         } else {
                             sPrice = WareHouse.get(uIndex).getPrice();
                         }
-                        System.out.println(WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                        System.out.println("\n"+ WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
                         WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
                         System.out.println("Time Sold:  " + calObj.getTime() + "\n");
 
                     } else {
-                        System.out.println("Part was not found!" + "\n");
+                        System.err.println("Part was not found!" + "\n");
                     }
 
                     break;
@@ -150,9 +149,9 @@ public class Main {
                         }
                     }
                     if (!Found) {
-                        System.err.println("The part was not found \n");
+                        System.err.println("\n"+"The part was not found \n");
                     } else {
-                        System.out.println(WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + " " + WareHouse.get(nIndex).getQuantity() + "\n");
+                        System.out.println("\n"+ WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + " " + WareHouse.get(nIndex).getQuantity() + "\n");
                     }
 
                     break;
@@ -176,7 +175,7 @@ public class Main {
                     }
                         System.out.println("");
                     }else{
-                        System.out.println("\n"+"Warehouse is empty." + "\n");
+                        System.err.println("\n"+"Warehouse is empty." + "\n");
                     }
                      break;
                     case "SORTNUMBER":
@@ -198,7 +197,7 @@ public class Main {
                             }
                             System.out.println("");
                         }else{
-                            System.out.println("\n" +"Warehouse is empty.  :( "+"\n");
+                            System.err.println("\n" +"Warehouse is empty.  :( "+"\n");
                         }
                         break;
                     case "QUIT":
@@ -211,7 +210,7 @@ public class Main {
                         pWriter.close();
                         break;
                 default:
-                    System.out.println("\n" + "Invalid Input!" + "\n" + "Please Enter Another Choice:" + "\n");
+                    System.err.println("\n" + "Invalid Input!" + "\n" + "Please Enter Another Choice:" + "\n");
 
             }
 
