@@ -3,6 +3,7 @@
 //Ben Hichak
 //Luis Maldonado
 import java.io.*;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,8 +96,10 @@ public class Main {
                         }
                         if (efound) {
                             WareHouse.get(eIndex).setQuantity(WareHouse.get(eIndex).getQuantity() + ePart.getQuantity());
+                            System.out.println("Part quantity updated"+"\n");
                         } else {
                             WareHouse.add(ePart);
+                            System.out.println("Part was added successfully"+"\n");
                         }
                         System.out.println("");
                     }catch(Exception e){
