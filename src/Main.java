@@ -2,6 +2,8 @@
 //Brittany Margelos
 //Ben Hichak
 //Luis Maldonado
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.*;
 import java.sql.SQLOutput;
 import java.text.DateFormat;
@@ -11,8 +13,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static java.awt.Color.black;
-import static java.awt.Color.red;
 
 public class Main {
     /**
@@ -23,7 +23,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Choices();
     }
-
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_RESET = "\u001B[0m";
     /**
      *
      * @throws IOException for reading in a file
@@ -43,7 +44,7 @@ public class Main {
         String Choice = "";
 
         while (!Choice.equalsIgnoreCase("Quit")) {
-            System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name \n" + "Enter a choice:");
+            System.out.println("Please select an option: \n" + "Read: Read an inventory delivery file \n" + "Enter: Enter a part \n" + "Sell: Sell a part \n" + "Display: display a part \n" + "SortName: Sort and Display parts by name \n" + "SortNumber: Sort parts by part name \n" + "Enter a choice:" );
             Choice = Input.next();
             Choice = Choice.toUpperCase();
             switch (Choice) {
@@ -74,7 +75,8 @@ public class Main {
 
                         }
 
-                        System.out.println(inFileName + " was read successfully. \n");
+
+                        System.out.println(ANSI_BLUE + inFileName + " was read successfully. \n" +  ANSI_RESET);
                     } catch (FileNotFoundException e) {
                         System.err.println("File does not exist.");
                         System.out.println("");
@@ -96,10 +98,10 @@ public class Main {
                         }
                         if (efound) {
                             WareHouse.get(eIndex).setQuantity(WareHouse.get(eIndex).getQuantity() + ePart.getQuantity());
-                            System.out.println("Part quantity updated"+"\n");
+                            System.out.println(ANSI_BLUE + "Part quantity updated"+ ANSI_RESET + "\n");
                         } else {
                             WareHouse.add(ePart);
-                            System.out.println("Part was added successfully"+"\n");
+                            System.out.println(ANSI_BLUE + "Part was added successfully"+ ANSI_RESET + "\n");
                         }
                         System.out.println("");
                     }catch(Exception e){
@@ -128,9 +130,9 @@ public class Main {
                         } else {
                             sPrice = WareHouse.get(uIndex).getPrice();
                         }
-                        System.out.println("\n"+ WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale());
+                        System.out.println("\n"+ ANSI_BLUE + WareHouse.get(uIndex).getName() + " Price: " + sPrice + " OnSale: " + WareHouse.get(uIndex).getOnSale()+ ANSI_RESET );
                         WareHouse.get(uIndex).setQuantity(WareHouse.get(uIndex).getQuantity() - 1);
-                        System.out.println("Time Sold:  " + calObj.getTime() + "\n");
+                        System.out.println( ANSI_BLUE + "Time Sold:  " + calObj.getTime() + ANSI_RESET +  "\n");
 
                     } else {
                         System.err.println("Part was not found!" + "\n");
@@ -161,7 +163,7 @@ public class Main {
                     if (!Found) {
                         System.err.println("The part was not found"+" \n");
                     } else {
-                        System.out.println("\n"+ WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + " " + WareHouse.get(nIndex).getQuantity() + "\n");
+                        System.out.println("\n"+ ANSI_BLUE + WareHouse.get(nIndex).getName() + " " + "Cost: " + pDisplay + " " + WareHouse.get(nIndex).getQuantity() + ANSI_RESET + "\n");
                     }
 
                     break;
@@ -181,7 +183,7 @@ public class Main {
                         }
                         System.out.println("");
                         for (int a = 0; a < WareHouse.size(); a++) {
-                            System.out.println(WareHouse.get(a).getInfo());
+                            System.out.println(ANSI_BLUE + WareHouse.get(a).getInfo() + ANSI_RESET);
                     }
                         System.out.println("");
                     }else{
@@ -203,7 +205,7 @@ public class Main {
                             }
                             System.out.println("");
                             for (int a = 0; a < WareHouse.size(); a++) {
-                                System.out.println(WareHouse.get(a).getInfo());
+                                System.out.println(ANSI_BLUE + WareHouse.get(a).getInfo() + ANSI_RESET);
                             }
                             System.out.println("");
                         }else{
@@ -237,6 +239,7 @@ public class Main {
         public static int getIndex (ArrayList list, BikePart part){
             return list.indexOf(part);
         }
+
 
     }
 
